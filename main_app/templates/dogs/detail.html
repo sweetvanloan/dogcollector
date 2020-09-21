@@ -28,6 +28,12 @@
             {{ feeding_form.as_p }}
             <input type="submit" class="btn" value="Add Feeding">
         </form>
+        <br>
+        {% if dog.fed_for_today %}
+        <div class="card-panel teal-text center-align">{{dog.name}} has been fed all meals for today</div>
+        {% else %}
+        <div class="card-panel red-text center-align">{{dog.name}} might be hungry</div>
+        {% endif %}
         <table class="striped">
             <thead>
                 <tr>
@@ -47,17 +53,36 @@
     </div>
 </div>
 
-<script>
-    var dateEl = document.getElementById('id_date');
-    M.Datepicker.init(dateEl, {
-        format: 'yyyy-mm-dd',
-        defaultDate: new Date(),
-        setDefaultDate: true,
-        autoClose: true
-    });
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{ dog.name }}'s Toys</h3>
+        {% if dog.toys.count %}
+        {% for toy in dog.toys.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    A <span style="color: {{ toy.color.lower }};">{{ toy.color }}</span> {{ toy.name }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{ dog.name }} has no toys!🐶</h5>
+        {% endif %}
+    </div>
 
-    var selectEl = document.getElementById('id_meal');
-    M.FormSelect.init(selectEl);
-</script>
+    <script>
+        var dateEl = document.getElementById('id_date');
+        M.Datepicker.init(dateEl, {
+            format: 'yyyy-mm-dd',
+            defaultDate: new Date(),
+            setDefaultDate: true,
+            autoClose: true
+        });
 
-{% endblock %}
+        var selectEl = document.getElementById('id_meal');
+        M.FormSelect.init(selectEl);
+    </script>
+
+    {% endblock %}
