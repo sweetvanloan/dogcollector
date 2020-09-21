@@ -63,6 +63,10 @@
             <div class="card-content">
                 <span class="card-title">
                     A <span style="color: {{ toy.color.lower }};">{{ toy.color }}</span> {{ toy.name }}
+                    <form action="{% url 'unassoc_toy' dog.id toy.id %}" method="post">
+                        {% csrf_token %}
+                        <button type=" submit" class="btn">Delete</button>
+                    </form>
                 </span>
             </div>
         </div>
@@ -79,7 +83,7 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">
-                    A <span style="color: {{ toy.color }};">{{ toy.color }}</span> {{ toy.name }}
+                    A <span style="color: {{ toy.color.lower }};">{{ toy.color }}</span> {{ toy.name }}
                 </span>
             </div>
             <div class="card-action">
