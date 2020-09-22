@@ -11,10 +11,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 import uuid
 import boto3
+import os
 
 S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
 BUCKET = 'dogcollector-sweetvanloan'
 
+def some_function(request):
+    my_key = os.environ['SECRET_KEY']
 
 # Create your views here.
 def home(request):
